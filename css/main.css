@@ -332,21 +332,27 @@ img {
 }
 
 .djc-squeeze__further {
-  margin-left: auto;
+  display: flex;
+  margin-top: 15px;
+  align-items: center;
+  gap: 20px;
+}
+
+.djc-squeeze__further p {
   font-weight: 600;
   cursor: pointer;
   font-size: 17px;
   width: fit-content;
-  margin-top: 10px;
   color: #046264;
   pointer-events: none;
   transition: .6s;
   opacity: 0;
   position: relative;
   padding-bottom: 2px;
+
 }
 
-.djc-squeeze__further::after {
+.djc-squeeze__further p::after {
   content: '';
   position: absolute;
   left: 0;
@@ -363,7 +369,7 @@ img {
   transform: scaleX(1);
 }
 
-.djc-squeeze__further.active {
+.djc-squeeze__further p.active {
   pointer-events: initial;
   color: #046264;
   opacity: 1;
@@ -452,19 +458,20 @@ img {
   width: fit-content;
   transition: .6s;
   cursor: pointer;
+  color: #046264;
 }
 
 .djc-squeeze__radio-btn:hover {
   background-color: #046264;
 }
 
-.djc-squeeze__radio-btn span {
+.djc-squeeze__radio-btn {
   color: #555;
   font-size: 15px;
   cursor: pointer;
 }
 
-.djc-squeeze__radio-btn:hover span {
+.djc-squeeze__radio-btn:hover {
   color: #fff;
 }
 

@@ -44,7 +44,7 @@
         const currentStep = event.target.closest('.djc-squeeze__step-box');
         if (currentStep) {
           // Находим кнопку перехода (это может быть и "Далее", и "Рассчитать стоимость")
-          const nextButton = currentStep.querySelector('.djc-squeeze__further');
+          const nextButton = currentStep.querySelector('.djc-squeeze__further-btn');
           if (nextButton) {
             nextButton.classList.add('active');
           }
@@ -54,7 +54,7 @@
 
     // 2. КЛИК НА КНОПКУ "ДАЛЕЕ" / "РАССЧИТАТЬ СТОИМОСТЬ"
     quizContainer.addEventListener('click', (event) => {
-      if (event.target && event.target.classList.contains('djc-squeeze__further')) {
+      if (event.target && event.target.classList.contains('djc-squeeze__further-btn')) {
         const currentButton = event.target;
 
         // Переходим, только если кнопка уже активна (пользователь выбрал радиокнопку)
@@ -85,7 +85,7 @@
 
         // Сбрасываем все выбранные радиокнопки и деактивируем кнопки "Далее"
         quizContainer.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
-        quizContainer.querySelectorAll('.djc-squeeze__further').forEach(btn => btn.classList.remove('active'));
+        quizContainer.querySelectorAll('.djc-squeeze__further-btn').forEach(btn => btn.classList.remove('active'));
 
         // ИСПРАВЛЕНО: Добавляем класс active самому первому шагу квиза через classList
         if (allSteps.length > 0) {

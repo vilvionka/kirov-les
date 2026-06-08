@@ -310,11 +310,21 @@ img {
   display: flex;
 }
 
+.djc-squeeze__radio-wrap--center .djc-squeeze__radio-box {
+  align-items: center;
+}
+
 .djc-squeeze__radio-box span {
   color: #555;
   line-height: 24px;
   font-size: 15px;
   transition: .6s;
+}
+
+.djc-squeeze__radio-box img {
+  width: 55px;
+  height: 35px;
+  padding-right: 20px;
 }
 
 .djc-squeeze__radio-box span.active {

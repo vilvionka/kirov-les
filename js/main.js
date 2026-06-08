@@ -33,7 +33,6 @@
 
 (() => {
 
-
   // Находим главный контейнер всего квиза
   const quizContainer = document.querySelector('.djc-squeeze__step');
 
@@ -52,34 +51,42 @@
       }
     });
 
-    // 2. КЛИК НА КНОПКУ "ДАЛЕЕ" / "РАССЧИТАТЬ СТОИМОСТЬ"
+    // ОБЩИЙ ОБРАБОТЧИК КЛИКОВ НА КОНТЕЙНЕРЕ
     quizContainer.addEventListener('click', (event) => {
+      const allSteps = quizContainer.querySelectorAll('.djc-squeeze__step-box');
+
+      // 2. КЛИК НА КНОПКУ "ДАЛЕЕ" / "РАССЧИТАТЬ СТОИМОСТЬ"
       if (event.target && event.target.classList.contains('djc-squeeze__further-btn')) {
         const currentButton = event.target;
 
         // Переходим, только если кнопка уже активна (пользователь выбрал радиокнопку)
         if (currentButton.classList.contains('active')) {
-          const allSteps = quizContainer.querySelectorAll('.djc-squeeze__step-box');
           const currentStep = currentButton.closest('.djc-squeeze__step-box');
-
-          // Находим индекс текущего шага
           const currentIndex = Array.from(allSteps).indexOf(currentStep);
-          // Определяем следующий шаг
           const nextStep = allSteps[currentIndex + 1];
 
           if (nextStep) {
-            // Удаляем active у всех шагов
             allSteps.forEach(step => step.classList.remove('active'));
-            // Добавляем active следующему шагу
             nextStep.classList.add('active');
           }
         }
       }
 
-      // 3. КЛИК НА КНОПКУ "РАССЧИТАТЬ ЗАНОВО"
-      if (event.target && event.target.classList.contains('djc-squeeze__reset')) {
-        const allSteps = quizContainer.querySelectorAll('.djc-squeeze__step-box');
+      // 3. ДОБАВЛЕНО: КЛИК НА КНОПКУ "НАЗАД"
+      if (event.target && event.target.classList.contains('djc-squeeze__further-back')) {
+        const currentStep = event.target.closest('.djc-squeeze__step-box');
+        const currentIndex = Array.from(allSteps).indexOf(currentStep);
+        const prevStep = allSteps[currentIndex - 1];
 
+        // Проверяем, существует ли предыдущий шаг
+        if (prevStep) {
+          allSteps.forEach(step => step.classList.remove('active'));
+          prevStep.classList.add('active');
+        }
+      }
+
+      // 4. КЛИК НА КНОПКУ "РАССЧИТАТЬ ЗАНОВО"
+      if (event.target && event.target.classList.contains('djc-squeeze__reset')) {
         // Удаляем класс active у абсолютно всех шагов
         allSteps.forEach(step => step.classList.remove('active'));
 
@@ -87,7 +94,7 @@
         quizContainer.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
         quizContainer.querySelectorAll('.djc-squeeze__further-btn').forEach(btn => btn.classList.remove('active'));
 
-        // ИСПРАВЛЕНО: Добавляем класс active самому первому шагу квиза через classList
+        // Добавляем класс active самому первому шагу квиза
         if (allSteps.length > 0) {
           allSteps[0].classList.add('active');
         }
